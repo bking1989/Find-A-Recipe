@@ -1,6 +1,6 @@
 body {
     background: url("../images/vintage-concrete.png");
-    margin: 10 auto;
+    margin: 0 auto;
     width: 80%;
 }
 
@@ -19,7 +19,7 @@ h1 {
 }
 
 #searchbar2 {
-    width: 10%;
+    width: 12%;
     margin-top: 10px;
 }
 
