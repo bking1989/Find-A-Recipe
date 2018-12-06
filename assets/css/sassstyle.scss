@@ -1,0 +1,36 @@
+$margin1: 10px;
+$margin2: 20px;
+
+body {
+    background: url("../images/vintage-concrete.png");
+    margin: 0 auto;
+    width: 80%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container{
+    margin-top: $margin2;
+    border: outset;
+}
+
+#searchbar1 {
+    width: 20%;
+    margin-top: $margin1;
+}
+
+#searchbar2 {
+    width: 12%;
+    margin-top: $margin1;
+}
+
+.btn {
+    margin-top: $margin1;
+    margin-bottom: $margin1;
+}
+
+#button {
+    margin-left: $margin2;
+}
