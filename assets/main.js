@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     let ingredients = [];
-    let ingQueryURL = "https://www.themealdb.com/api/json/v1/1/fiter.php?i=";
+    let ingQueryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
     let recipeQueryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 
     $("#add-ingredients").on("click", function () {
@@ -19,10 +19,37 @@ $(document).ready(function () {
 
     $(document).on("click" , ".remove-btn", function(){
         let removeIndex = $(this).attr("index");
-        console.log(removeIndex);
     
         ingredients.splice(removeIndex, 1);
         createList(ingredients);
+    });
+
+    $("#search-button").on("click", function(){
+
+        $("#ingredients-list").empty();
+
+        let searchTerms = "";
+
+        for(let i = 0; i < ingredients.length; i++){
+
+            for(let j = 0; j < ingredients[i].length; j++){
+                if(ingredients[i][j] === " "){
+                    searchTerms += "%20";
+                }
+                else{
+                    searchTerms += ingredients[i][j];
+                }
+            };
+
+            if(i !== ingredients.length-1){
+                searchTerms += "&";
+            };
+        };
+
+        console.log(ingQueryURL+searchTerms);
+        ingredients = [];
+        console.log(ingredients);
+        
     });
     
     function createList(arr){
