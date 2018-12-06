@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Find A Recipe</title>
 </head>
 <body>
+    <h1>Find A Recipe!</h1>
+    
+    <div class="container">
+
+        <div id="search">
+            <div class="form-group">
+                <input class="form-input" type="text" id="searchbar1" placeholder="Search Recipes">
+                <button class="btn btn-success">Search</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+       
+
+        <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingedient">
+        <button class="btn btn-success">Add</button><button id="button" class="btn btn-success">Search</button>
+    </div>
+    
+    <div class="modal modal-lg">
+        <a href="#close" class="modal-overlay" aria-label="Close"></a>
+            <div class="modal-container">
+                <!-- modal structure here -->
+            </div>
+    </div>
     
 </body>
 </html>
