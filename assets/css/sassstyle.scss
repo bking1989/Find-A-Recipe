@@ -1,3 +1,6 @@
+$margin1: 10px;
+$margin2: 20px;
+
 body {
     background: url("../images/vintage-concrete.png");
     margin: 0 auto;
@@ -9,25 +12,25 @@ h1 {
 }
 
 .container{
-    margin-top: 20px;
+    margin-top: $margin2;
     border: outset;
 }
 
 #searchbar1 {
     width: 20%;
-    margin-top: 10px;
+    margin-top: $margin1;
 }
 
 #searchbar2 {
     width: 12%;
-    margin-top: 10px;
+    margin-top: $margin1;
 }
 
 .btn {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: $margin1;
+    margin-bottom: $margin1;
 }
 
 #button {
-    margin-left: 20px;
+    margin-left: $margin2;
 }
