@@ -17,42 +17,72 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click" , ".remove-btn", function(){
+    $(document).on("click", ".remove-btn", function () {
         let removeIndex = $(this).attr("index");
-    
+
         ingredients.splice(removeIndex, 1);
         createList(ingredients);
     });
 
-    $("#search-button").on("click", function(){
 
+
+
+
+    //How to make this work
+    $("#search-button").on("click", function () {
+        $("#modal-id").addClass("active");
         $("#ingredients-list").empty();
 
         let searchTerms = "";
 
-        for(let i = 0; i < ingredients.length; i++){
+        for (let i = 0; i < ingredients.length; i++) {
 
-            for(let j = 0; j < ingredients[i].length; j++){
-                if(ingredients[i][j] === " "){
+            for (let j = 0; j < ingredients[i].length; j++) {
+                if (ingredients[i][j] === " ") {
                     searchTerms += "%20";
                 }
-                else{
+                else {
                     searchTerms += ingredients[i][j];
                 }
             };
 
-            if(i !== ingredients.length-1){
+            if (i !== ingredients.length - 1) {
                 searchTerms += "&";
             };
         };
 
-        console.log(ingQueryURL+searchTerms);
+        let query = ingQueryURL + searchTerms;
+        console.log(query);
+
+        $.ajax({
+            url: query,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            $(".content").empty();
+
+            if (response.meals === null) {
+                $(".content").append("<p>No recipes found. Please try again.</p>");
+            }
+            else {
+                let recipeList = $("<ol>");
+                response.meals.forEach(function (obj) {
+                    recipeList.append(`<li><a href='#' id='recipe-result' recipe-id=${obj.idMeal}>${obj.strMeal}</a></li>`);
+                });
+
+                $(".content").append(recipeList);
+            }
+        });
+
         ingredients = [];
-        console.log(ingredients);
-        
+
     });
-    
-    function createList(arr){
+
+    $("#close").on("click", function () {
+        $("#modal-id").removeClass("active");
+    });
+
+    function createList(arr) {
         $("#ingredients-list").empty();
         let index = 0;
         arr.forEach(function (element) {
@@ -63,7 +93,7 @@ $(document).ready(function () {
             removeBtn.text("✓");
             arrP.text(element);
             arrP = arrP.prepend(removeBtn);
-    
+
             $("#ingredients-list").append(arrP);
             index++;
         });

@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/sassstyle.css">
+    <!--<link rel="stylesheet" type="text/css" href="assets/css/modal.css">-->
 
     <title>Find A Recipe</title>
 </head>
@@ -35,17 +36,26 @@
         <button id="search-button" class="btn btn-success">Search</button>
     </div>
 
-    <div class="modal modal-lg">
+    <div class="modal" id="modal-id">
         <a href="#close" class="modal-overlay" aria-label="Close"></a>
         <div class="modal-container">
-            <!-- modal structure here -->
+            <div class="modal-header">
+                <a href="#close" class="btn btn-clear float-right" id ="close" aria-label="Close"></a>
+                <div class="modal-title h5">Results:</div>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <!-- content here -->
+                </div>
+            </div>
+            
         </div>
     </div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-    <script src = "assets/main.js"></script>
+    <script src="assets/main.js"></script>
 
 </body>
 
