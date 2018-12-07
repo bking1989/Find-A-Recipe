@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/sassstyle.css">
     <title>Find A Recipe</title>
 </head>
@@ -26,16 +26,24 @@
     
 
     <div class="container">
-        <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingedient">
-        <button class="btn btn-success">Add</button><button id="button" class="btn btn-success">Search</button>
-    </div>
-    
-    <div class="modal modal-lg">
-        <a href="#close" class="modal-overlay" aria-label="Close"></a>
-            <div class="modal-container">
-                <!-- modal structure here -->
+        <body>
+            <div class="card">
+                <div class="card-header">
+                    Ingredients
+                </div>
+                <div class="card-body">
+                    ...
+                </div>
+        
             </div>
+        </body>
+        
+        <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingedient">
+        <button class="btn btn-success">Add</button><button class="btn btn-success">Search</button>
     </div>
-    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script src = "assets/main.js"></script>
 </body>
 </html>

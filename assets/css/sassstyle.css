@@ -1,41 +1,59 @@
 body {
   background: url("../images/vintage-concrete.png");
   margin: 0 auto;
-  width: 80%;
-}
-
-.container {
-  margin-top: 20px;
-  border: outset;
 }
 
 #headerFont {
-  margin-left: 5px;
+  margin-left: .3125em;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.5625em;
 }
 
-#foodbar {
-  padding: 5px;
+.navbar {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   background: url("../images/585be1aa1600002400bdf2a6.jpg");
+  border: outset;
 }
 
 #searchbar1 {
-  width: 30%;
-  margin-top: 10px;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+}
+
+.container {
+  margin-top: 1.25rem;
+  border: outset;
+  height: 45em;
+}
+
+.card {
+  margin-top: 1.25rem;
+  width: 20rem;
+  height: 40rem;
+  border: 2px solid black;
+  margin-left: 1.25em;
+}
+
+.card-header {
+  border-bottom: 2px solid black;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  background-color: tan;
 }
 
 #searchbar2 {
-  width: 20%;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .btn {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#button {
-  margin-left: 20px;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  margin-left: 1.25rem;
 }
 /*# sourceMappingURL=sassstyle.css.map */

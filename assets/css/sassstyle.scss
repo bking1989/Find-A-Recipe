@@ -1,6 +1,10 @@
-// navbar image? background: url("../images/585be1aa1600002400bdf2a6.jpg")
-$margin1: 10px;
-$margin2: 20px;
+$cardwidth: 20rem;
+$cardheight: 40rem;
+$cardborder: 2px solid black;
+$cardbackground: tan;
+$cardfontsize: 1.5rem;
+$margin1: .625rem;
+$margin2: 1.25rem;
 $border: outset;
 
 body {
@@ -8,36 +12,56 @@ body {
     margin: 0 auto;
 }
 
-.container{
-    margin-top: $margin2;
-    border: $border;
-}
-
 #headerFont {
-    margin-left: 5px;
+    margin-left: .3125em;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 1.5625em;
 }
 
 .navbar {
-    
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: url("../images/585be1aa1600002400bdf2a6.jpg");
+    border: $border;
 }
 
 #searchbar1 {
-    width: 30%;
     margin-top: $margin1;
+    margin-bottom: $margin1;
+}
+
+.container{
+    margin-top: $margin2;
+    border: $border;
+    height: 45em;
+}
+
+.card {
+    margin-top: $margin2;
+    width: $cardwidth;
+    height: $cardheight;
+    border: $cardborder; 
+    margin-left: 1.25em;
+}
+.card-header {
+    border-bottom: $cardborder;
+    text-align: center;
+    font-size: $cardfontsize;
+}
+
+.card-body {
+    background-color: $cardbackground;
+
 }
 
 #searchbar2 {
-    width: 20%;
     margin-top: $margin1;
 }
 
 .btn {
     margin-top: $margin1;
     margin-bottom: $margin1;
-}
-
-#button {
     margin-left: $margin2;
 }
