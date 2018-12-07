@@ -1,5 +1,7 @@
+// navbar image? background: url("../images/585be1aa1600002400bdf2a6.jpg")
 $margin1: 10px;
 $margin2: 20px;
+$border: outset;
 
 body {
     background: url("../images/vintage-concrete.png");
@@ -7,22 +9,28 @@ body {
     width: 80%;
 }
 
-h1 {
-    text-align: center;
-}
-
 .container{
     margin-top: $margin2;
-    border: outset;
+    border: $border;
+}
+
+#headerFont {
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.navbar {
+
 }
 
 #searchbar1 {
-    width: 20%;
+    width: 30%;
     margin-top: $margin1;
 }
 
 #searchbar2 {
-    width: 12%;
+    width: 20%;
     margin-top: $margin1;
 }
 

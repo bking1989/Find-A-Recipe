@@ -10,22 +10,22 @@
     <title>Find A Recipe</title>
 </head>
 <body>
-    <h1>Find A Recipe!</h1>
     
-    <div class="container">
+    <header class="navbar">
+        <section class="navbar-section">
+            <a id="headerFont" class="navbar-brand mr-2 text-light">Find A Recipe!</a>
+        </section>
 
-        <div id="search">
-            <div class="form-group">
-                <input class="form-input" type="text" id="searchbar1" placeholder="Search Recipes">
-                <button class="btn btn-success">Search</button>
+        <section class="navbar-section">
+            <div class="input-group input-inline">
+                <input id="searchbar1" class="form-input" type="text" placeholder="Search Recipes">
+                <button class="btn btn-success input-group-btn">Search</button>
             </div>
-        </div>
-
-    </div>
+        </section>
+    </header>
+    
 
     <div class="container">
-       
-
         <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingedient">
         <button class="btn btn-success">Add</button><button id="button" class="btn btn-success">Search</button>
     </div>
