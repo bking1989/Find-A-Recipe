@@ -24,6 +24,7 @@ $(document).ready(function() {
             // Render video gallery
             const videoRender = () => {
                 $("#videoCol").empty();
+                $("#embeddedVideo").empty();
                 
                 for (var i = 0; i < response.items.length; i++) {
                     let videoLink = $("<a class='my-3 video-link'>");
