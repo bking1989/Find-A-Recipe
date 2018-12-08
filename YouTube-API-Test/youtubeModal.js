@@ -31,8 +31,7 @@ $(document).ready(function() {
                     let thumbnail = $("<img class='img-fluid'>");
                     let videoTitle = $("<p>");
 
-                    $(videoLink).attr("href", "https://www.youtube.com/watch?v=" + response.items[i].id.videoId);
-                    $(videoLink).attr("target", "_blank");
+                    $(videoLink).attr("data-video", response.items[i].id.videoId);
                     $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
                     $(videoTitle).text(response.items[i].snippet.title);
                     
@@ -51,5 +50,17 @@ $(document).ready(function() {
             const videoHeader = $("<h5>Here are some relevant videos you can use, too.</h5>");
             $("#videoCol").prepend(videoHeader);
         });
+    });
+
+    // Listener for video link
+    $(document).on("click", '.video-link', function() {
+        $("#embeddedVideo").empty();
+        
+        const videoSrc = $(this).attr("data-video");
+
+        const videoIframe = $("<iframe id='ytplayer' type='text/html' width='640' height='360' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>");
+        $(videoIframe).attr("src", "https://www.youtube.com/embed/" + videoSrc + "?autoplay=0");
+
+        $("#embeddedVideo").append(videoIframe);
     });
 });
