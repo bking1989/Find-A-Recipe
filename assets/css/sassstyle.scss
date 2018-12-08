@@ -1,36 +1,67 @@
-$margin1: 10px;
-$margin2: 20px;
+$cardwidth: 16.4rem;
+$cardheight: 40rem;
+$cardborder: 2px solid grey;
+$cardfontsize: 1.5rem;
+$margin1: .625rem;
+$margin2: 1.25rem;
+$border: outset;
 
 body {
     background: url("../images/vintage-concrete.png");
     margin: 0 auto;
-    width: 80%;
 }
 
-h1 {
-    text-align: center;
+#headerFont {
+    margin-left: .3125em;
+    font-weight: bold;
+    font-size: 1.5625em;
+}
+
+.navbar {
+    background: url("../images/nav.jpg");
+    border: $border;
+}
+
+#searchbar1 {
+    margin-top: $margin1;
+    margin-bottom: $margin1;
 }
 
 .container{
     margin-top: $margin2;
-    border: outset;
+    border: $border;
+    height: 48em;
 }
 
-#searchbar1 {
-    width: 20%;
-    margin-top: $margin1;
+.card {
+    margin-top: $margin2;
+    width: $cardwidth;
+    min-height: $cardheight;
+    border: $cardborder; 
+    margin-left: .27em;
 }
+.card-header {
+    color: grey;
+    border-bottom: $cardborder;
+    text-align: center;
+    font-size: $cardfontsize;
+}
+
+.card-body {
+    background-color: rgb(251, 233, 175);
+}
+
+// .ingredients {
+//     overflow: scroll;
+// }
 
 #searchbar2 {
-    width: 12%;
     margin-top: $margin1;
+    margin-left: .5em;
 }
 
 .btn {
     margin-top: $margin1;
     margin-bottom: $margin1;
-}
-
-#button {
     margin-left: $margin2;
 }

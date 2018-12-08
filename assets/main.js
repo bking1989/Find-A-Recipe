@@ -24,14 +24,10 @@ $(document).ready(function () {
         createList(ingredients);
     });
 
-
-
-
-
-    //How to make this work
+    
     $("#search-button").on("click", function () {
-        $("#modal-id").addClass("active");
-        $("#ingredients-list").empty();
+        //$("#modal-id").addClass("active");
+        $(".ingredients-list").empty();
 
         let searchTerms = "";
 
@@ -52,17 +48,15 @@ $(document).ready(function () {
         };
 
         let query = ingQueryURL + searchTerms;
-        console.log(query);
 
         $.ajax({
             url: query,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
-            $(".content").empty();
+            $(".modal-id").empty();
 
             if (response.meals === null) {
-                $(".content").append("<p>No recipes found. Please try again.</p>");
+                $(".modal-id").append("<p>No recipes found. Please try again.</p>");
             }
             else {
                 let recipeList = $("<ol>");
@@ -70,7 +64,7 @@ $(document).ready(function () {
                     recipeList.append(`<li><a href='#' id='recipe-result' recipe-id=${obj.idMeal}>${obj.strMeal}</a></li>`);
                 });
 
-                $(".content").append(recipeList);
+                $(".modal-id").append(recipeList);
             }
         });
 
@@ -78,12 +72,12 @@ $(document).ready(function () {
 
     });
 
-    $("#close").on("click", function () {
+    /*$("#close").on("click", function () {
         $("#modal-id").removeClass("active");
-    });
+    });*/
 
     function createList(arr) {
-        $("#ingredients-list").empty();
+        $(".ingredients-list").empty();
         let index = 0;
         arr.forEach(function (element) {
             let arrP = $("<p>");
@@ -94,7 +88,7 @@ $(document).ready(function () {
             arrP.text(element);
             arrP = arrP.prepend(removeBtn);
 
-            $("#ingredients-list").append(arrP);
+            $(".ingredients-list").append(arrP);
             index++;
         });
     }
