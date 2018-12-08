@@ -7,45 +7,70 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/sassstyle.css">
 
     <title>Find A Recipe</title>
 </head>
 
 <body>
-    <h1>Find A Recipe!</h1>
-    <div class="container">
 
-        <div id="search">
-            <div class="form-group">
-                <input class="form-input" type="text" id="searchbar1" placeholder="Search Recipes">
-                <button class="btn btn-success">Search</button>
+    <header class="navbar">
+        <section class="navbar-section">
+            <a id="headerFont" class="navbar-brand mr-2 text-light">Find A Recipe!</a>
+        </section>
+
+        <section class="navbar-section">
+            <div class="input-group input-inline">
+                <input id="searchbar1" class="form-input" type="text" placeholder="Search Recipes">
+                <button class="btn btn-success input-group-btn">Search</button>
+            </div>
+        </section>
+    </header>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        Ingredients
+                    </div>
+                    <!-- <div class="ingredients"> -->
+                        <div class="card-body">
+                            ...
+                        </div>
+                       
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div class="col-md-7">
+
             </div>
         </div>
 
-    </div>
+        <div class="row">
+            <div class="col-md-12">
+            <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingedient">
+            </div>
 
-    <div class="container">
-
-        <div id="ingredients-list"></div>
-
-        <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingredient">
-        <button class="btn btn-success" id="add-ingredients">Add</button>
-        <button id="search-button" class="btn btn-success">Search</button>
-    </div>
-
-    <div class="modal modal-lg">
-        <a href="#close" class="modal-overlay" aria-label="Close"></a>
-        <div class="modal-container">
-            <!-- modal structure here -->
+            <button class="btn btn-success">Add</button><button class="btn btn-success">Search</button>
         </div>
+    
     </div>
 
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          ...
+        </div>
+      </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-    <script src = "assets/main.js"></script>
+    <script src="assets/main.js"></script>
 
 </body>
 
