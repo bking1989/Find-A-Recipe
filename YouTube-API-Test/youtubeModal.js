@@ -25,23 +25,31 @@ $(document).ready(function() {
             const videoRender = () => {
                 $("#videoCol").empty();
                 
-                for (var i = 0; i < 10; i++) {
+                for (var i = 0; i < response.items.length; i++) {
+                    let videoLink = $("<a class='my-3 video-link'>");
                     let videoDiv = $("<div>");
                     let thumbnail = $("<img class='img-fluid'>");
                     let videoTitle = $("<p>");
 
-                    thumbnail.attr("src", response.items[i].snippet.thumbnails.high.url);
-                    videoTitle.text(response.items[i].snippet.title);
+                    $(videoLink).attr("href", "https://www.youtube.com/watch?v=" + response.items[i].id.videoId);
+                    $(videoLink).attr("target", "_blank");
+                    $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
+                    $(videoTitle).text(response.items[i].snippet.title);
                     
                     $(videoDiv).append(thumbnail);
                     $(videoDiv).append(videoTitle);
 
-                    $("#videoCol").append(videoDiv);
+                    $(videoLink).append(videoDiv);
+                    $("#videoCol").append(videoLink);
                 };
             };
 
             console.log(response);
+
             videoRender();
+
+            const videoHeader = $("<h5>Here are some relevant videos you can use, too.</h5>");
+            $("#videoCol").prepend(videoHeader);
         });
     });
 });
