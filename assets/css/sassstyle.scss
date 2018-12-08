@@ -1,7 +1,6 @@
-$cardwidth: 20rem;
+$cardwidth: 16.4rem;
 $cardheight: 40rem;
-$cardborder: 2px solid black;
-$cardbackground: tan;
+$cardborder: 2px solid grey;
 $cardfontsize: 1.5rem;
 $margin1: .625rem;
 $margin2: 1.25rem;
@@ -35,29 +34,34 @@ body {
 .container{
     margin-top: $margin2;
     border: $border;
-    height: 45em;
+    height: 48em;
 }
 
 .card {
     margin-top: $margin2;
     width: $cardwidth;
-    height: $cardheight;
+    min-height: $cardheight;
     border: $cardborder; 
-    margin-left: 1.25em;
+    margin-left: .27em;
 }
 .card-header {
+    color: grey;
     border-bottom: $cardborder;
     text-align: center;
     font-size: $cardfontsize;
 }
 
 .card-body {
-    background-color: $cardbackground;
-
+    background-color: rgb(251, 233, 175);
 }
+
+// .ingredients {
+//     overflow: scroll;
+// }
 
 #searchbar2 {
     margin-top: $margin1;
+    margin-left: .5em;
 }
 
 .btn {

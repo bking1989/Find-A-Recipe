@@ -26,29 +26,31 @@ body {
 .container {
   margin-top: 1.25rem;
   border: outset;
-  height: 45em;
+  height: 48em;
 }
 
 .card {
   margin-top: 1.25rem;
-  width: 20rem;
-  height: 40rem;
-  border: 2px solid black;
-  margin-left: 1.25em;
+  width: 16.4rem;
+  min-height: 40rem;
+  border: 2px solid grey;
+  margin-left: .27em;
 }
 
 .card-header {
-  border-bottom: 2px solid black;
+  color: grey;
+  border-bottom: 2px solid grey;
   text-align: center;
   font-size: 1.5rem;
 }
 
 .card-body {
-  background-color: tan;
+  background-color: #fbe9af;
 }
 
 #searchbar2 {
   margin-top: 0.625rem;
+  margin-left: .5em;
 }
 
 .btn {

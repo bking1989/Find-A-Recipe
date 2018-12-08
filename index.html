@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/sassstyle.css">
     <title>Find A Recipe</title>
 </head>
+
 <body>
-    
+
     <header class="navbar">
         <section class="navbar-section">
             <a id="headerFont" class="navbar-brand mr-2 text-light">Find A Recipe!</a>
@@ -23,27 +26,41 @@
             </div>
         </section>
     </header>
-    
+
 
     <div class="container">
-        <body>
-            <div class="card">
-                <div class="card-header">
-                    Ingredients
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        Ingredients
+                    </div>
+                    <!-- <div class="ingredients"> -->
+                        <div class="card-body">
+                            ...
+                        </div>
+                       
+                    <!-- </div> -->
                 </div>
-                <div class="card-body">
-                    ...
-                </div>
-        
             </div>
-        </body>
-        
-        <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingedient">
-        <button class="btn btn-success">Add</button><button class="btn btn-success">Search</button>
+            <div class="col-md-7">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+            <input class="form-input" type="text" id="searchbar2" placeholder="Add Ingedient">
+            </div>
+
+            <button class="btn btn-success">Add</button><button class="btn btn-success">Search</button>
+        </div>
+    
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
-    <script src = "assets/main.js"></script>
+        crossorigin="anonymous"></script>
+    <script src="assets/main.js"></script>
 </body>
+
 </html>
