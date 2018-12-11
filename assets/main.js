@@ -1,9 +1,13 @@
 $(document).ready(function () {
 
     let ingredients = [];
-    let ingQueryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
-    let recipeQueryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-    let idQueryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+
+    const ingQueryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
+    const recipeQueryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+    const idQueryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+
+    
+
 
     $("#add-ingredients").on("click", function () {
         event.preventDefault();
@@ -25,10 +29,10 @@ $(document).ready(function () {
         createList(ingredients);
     });
 
-    
+
     $("#search-button").on("click", function () {
-        //$("#modal-id").addClass("active");
-        $(".ingredients-list").empty();
+
+        $("#search-results").empty();
 
         let searchTerms = "";
 
@@ -54,10 +58,13 @@ $(document).ready(function () {
             url: query,
             method: "GET"
         }).then(function (response) {
-            $(".modal-id").empty();
+            $("#search-results").empty();
 
             if (response.meals === null) {
-                $(".modal-id").append("<p>No recipes found. Please try again.</p>");
+                $("#search-results").append("<p>No recipes found. Please try again.</p>");
+            }
+            else if(searchTerms === ""){
+                $("#search-results").append("<p>Please add ingredients.</p>");
             }
             else {
                 let recipeList = $("<ol>");
@@ -65,17 +72,110 @@ $(document).ready(function () {
                     recipeList.append(`<li><a href='#' id='recipe-result' recipe-id=${obj.idMeal}>${obj.strMeal}</a></li>`);
                 });
 
-                $(".modal-id").append(recipeList);
+                $("#search-results").append(recipeList);
             }
         });
 
-        ingredients = [];
 
     });
 
-    /*$("#close").on("click", function () {
-        $("#modal-id").removeClass("active");
-    });*/
+    $(document).on("click", "#recipe-result", function () {
+        let recipeID = $(this).attr("recipe-id");
+        let recipeQuery = idQueryURL + recipeID;
+        let ingredientList = $("<ul>");
+        let foodImageHtml = $("<img >");
+        let imageURL;
+        let imageAlt;
+        let recipeText;
+
+        let ingMeasureArr = [];
+
+        $.ajax({
+            url: recipeQuery,
+            method: "GET"
+        }).then(function (recipe) {
+
+            imageURL = recipe.meals[0].strMealThumb;
+
+            imageAlt = recipe.meals[0].strMeal;
+            foodImageHtml.attr("src", imageURL);
+            foodImageHtml.attr("alt", imageAlt);
+            recipeText = recipe.meals[0].strInstructions;
+
+            if (recipe.meals[0].strMeasure1 !== "" && recipe.meals[0].strMeasure1 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure1 + " " + recipe.meals[0].strIngredient1);
+            }
+            if (recipe.meals[0].strMeasure2 !== "" && recipe.meals[0].strMeasure2 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure2 + " " + recipe.meals[0].strIngredient2);
+            }
+            if (recipe.meals[0].strMeasure3 !== "" && recipe.meals[0].strMeasure3 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure3 + " " + recipe.meals[0].strIngredient3);
+            }
+            if (recipe.meals[0].strMeasure4 !== "" && recipe.meals[0].strMeasure4 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure4 + " " + recipe.meals[0].strIngredient4);
+            }
+            if (recipe.meals[0].strMeasure5 !== "" && recipe.meals[0].strMeasure5 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure5 + " " + recipe.meals[0].strIngredient5);
+            }
+            if (recipe.meals[0].strMeasure6 !== "" && recipe.meals[0].strMeasure6 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure6 + " " + recipe.meals[0].strIngredient6);
+            }
+            if (recipe.meals[0].strMeasure7 !== "" && recipe.meals[0].strMeasure7 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure7 + " " + recipe.meals[0].strIngredient7);
+            }
+            if (recipe.meals[0].strMeasure8 !== "" && recipe.meals[0].strMeasure8 !== null){
+                ingMeasureArr.push(recipe.meals[0].strMeasure8 + " " + recipe.meals[0].strIngredient8);
+            }
+            if (recipe.meals[0].strMeasure9 !== "" && recipe.meals[0].strMeasure9 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure9 + " " + recipe.meals[0].strIngredient9);
+            }
+            if (recipe.meals[0].strMeasure10 !== "" && recipe.meals[0].strMeasure10 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure10 + " " + recipe.meals[0].strIngredient10);
+            }
+            if (recipe.meals[0].strMeasure11 !== "" && recipe.meals[0].strMeasure11 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure11 + " " + recipe.meals[0].strIngredient11);
+            }
+            if (recipe.meals[0].strMeasure12 !== "" && recipe.meals[0].strMeasure12 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure12 + " " + recipe.meals[0].strIngredient12);
+            }
+            if (recipe.meals[0].strMeasure13 !== "" && recipe.meals[0].strMeasure13 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure13 + " " + recipe.meals[0].strIngredient13);
+            }
+            if (recipe.meals[0].strMeasure14 !== "" && recipe.meals[0].strMeasure14 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure14 + " " + recipe.meals[0].strIngredient14);
+            }
+            if (recipe.meals[0].strMeasure15 !== "" && recipe.meals[0].strMeasure15 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure15 + " " + recipe.meals[0].strIngredient15);
+            }
+            if (recipe.meals[0].strMeasure16 !== "" && recipe.meals[0].strMeasure16 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure16 + " " + recipe.meals[0].strIngredient16);
+            }
+            if (recipe.meals[0].strMeasure17 !== "" && recipe.meals[0].strMeasure17 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure17 + " " + recipe.meals[0].strIngredient17);
+            }
+            if (recipe.meals[0].strMeasure18 !== "" && recipe.meals[0].strMeasure18 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure18 + " " + recipe.meals[0].strIngredient18);
+            }
+            if (recipe.meals[0].strMeasure19 !== "" && recipe.meals[0].strMeasure19 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure19 + " " + recipe.meals[0].strIngredient19);
+            }
+            if (recipe.meals[0].strMeasure20 !== "" && recipe.meals[0].strMeasure20 !== null) {
+                ingMeasureArr.push(recipe.meals[0].strMeasure20 + " " + recipe.meals[0].strIngredient20);
+            }
+
+            ingMeasureArr.forEach(function (element) {
+                let ingItem = $("<li>");
+                ingItem.text(element);
+                ingredientList.append(ingItem);
+            });
+            let recipeItems = $("<div>");
+            recipeItems.append(foodImageHtml, ingredientList, recipeText);
+
+            $("#recipe-container").html(recipeItems);
+
+        });
+
+    });
 
     function createList(arr) {
         $(".ingredients-list").empty();
