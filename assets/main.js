@@ -6,9 +6,6 @@ $(document).ready(function () {
     const recipeQueryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     const idQueryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
 
-    
-
-
     $("#add-ingredients").on("click", function () {
         event.preventDefault();
 
@@ -19,7 +16,7 @@ $(document).ready(function () {
             ingredients.push(ingredient);
 
             createList(ingredients);
-        }
+        };
     });
 
     $(document).on("click", ".remove-btn", function () {
@@ -28,7 +25,6 @@ $(document).ready(function () {
         ingredients.splice(removeIndex, 1);
         createList(ingredients);
     });
-
 
     $("#search-button").on("click", function () {
 
@@ -63,7 +59,7 @@ $(document).ready(function () {
             if (response.meals === null) {
                 $("#search-results").append("<p>No recipes found. Please try again.</p>");
             }
-            else if(searchTerms === ""){
+            else if (searchTerms === "") {
                 $("#search-results").append("<p>Please add ingredients.</p>");
             }
             else {
@@ -82,6 +78,159 @@ $(document).ready(function () {
     $(document).on("click", "#recipe-result", function () {
         let recipeID = $(this).attr("recipe-id");
         let recipeQuery = idQueryURL + recipeID;
+
+        showRecipe(recipeQuery);
+
+    });
+
+    // Listener and function for top most search button
+    $(document).on("click", "#topSearchBtn", function () {
+        event.preventDefault();
+
+        let nameSearchTerm = $("#searchbar1").val().trim();
+        $("#searchbar1").val("");
+
+        let searchTerms = "";
+
+        for (let i = 0; i < nameSearchTerm.length; i++) {
+
+            if (nameSearchTerm[i] === " ") {
+                searchTerms += "%20";
+            }
+            else {
+                searchTerms += nameSearchTerm[i];
+            }
+        };
+
+        if (nameSearchTerm == "") {
+            return false;
+        } else {
+            showRecipe(recipeQueryURL + searchTerms);
+
+            // Query URL
+            const queryURL = "https://www.googleapis.com/youtube/v3/search";
+
+            // API Key
+            const apiKey = "AIzaSyCjuGA0pvhgoecbDeHFEn4iygJX6zzLGA0";
+            
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                data: {
+                    key: apiKey,
+                    maxResults: 4,
+                    part: "snippet, id",
+                    q: `${searchTerms}`,
+                    type: "video"
+                }
+            }).then(function (response) {
+                // Render video gallery
+                const videoRender = () => {
+                    $("#videoContainer").empty();
+    
+                    for (var i = 0; i < response.items.length; i++) {
+                        let videoLink = $("<a class='my-3 video-link'>");
+                        let videoDiv = $("<div class='m-3' style='display: inline-block; height: 160px;'>");
+                        let thumbnail = $("<img class='img-fluid'>");
+                        let videoTitle = $("<p>");
+    
+                        $(videoLink).attr("data-video", response.items[i].id.videoId);
+                        $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
+                        $(videoTitle).text(response.items[i].snippet.title);
+    
+                        $(videoDiv).append(thumbnail);
+                        $(videoDiv).append(videoTitle);
+    
+                        $(videoLink).append(videoDiv);
+                        $("#videoContainer").append(videoLink);
+                    };
+                };
+    
+                videoRender();
+            });
+        };
+    });
+
+    // Listener for buttons
+    $(document).on("click", "#recipe-result", function () {
+        // Format term for query
+        const formattedTerms = $(this).text().split(" ").join("+");
+
+        // Query URL
+        const queryURL = "https://www.googleapis.com/youtube/v3/search";
+
+        // API Key
+        const apiKey = "AIzaSyCjuGA0pvhgoecbDeHFEn4iygJX6zzLGA0";
+
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+            data: {
+                key: apiKey,
+                maxResults: 4,
+                part: "snippet, id",
+                q: `${formattedTerms}`,
+                type: "video"
+            }
+        }).then(function (response) {
+            // Render video gallery
+            const videoRender = () => {
+                $("#videoContainer").empty();
+
+                for (var i = 0; i < response.items.length; i++) {
+                    let videoLink = $("<a class='my-3 video-link'>");
+                    let videoDiv = $("<div class='m-3' style='display: inline-block; height: 160px;'>");
+                    let thumbnail = $("<img class='img-fluid'>");
+                    let videoTitle = $("<p>");
+
+                    $(videoLink).attr("data-video", response.items[i].id.videoId);
+                    $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
+                    $(videoTitle).text(response.items[i].snippet.title);
+
+                    $(videoDiv).append(thumbnail);
+                    $(videoDiv).append(videoTitle);
+
+                    $(videoLink).append(videoDiv);
+                    $("#videoContainer").append(videoLink);
+                };
+            };
+
+            videoRender();
+        });
+    });
+
+    // Listener for video link
+    $(document).on("click", '.video-link', function () {
+        $("#recipe-container").empty();
+
+        const videoSrc = $(this).attr("data-video");
+
+        const videoIframe = $("<iframe id='ytplayer' class='m-3' type='text/html' width='640' height='360' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>");
+        $(videoIframe).attr("src", "https://www.youtube.com/embed/" + videoSrc + "?autoplay=0");
+
+        $("#recipe-container").append(videoIframe);
+    });
+
+    function createList(arr) {
+        $(".ingredients-list").empty();
+        let index = 0;
+        arr.forEach(function (element) {
+            let arrP = $("<p>");
+            let removeBtn = $("<button>");
+            removeBtn.addClass("remove-btn");
+            removeBtn.attr("index", index);
+            removeBtn.text("✓");
+            arrP.text(element);
+            arrP = arrP.prepend(removeBtn);
+
+            $(".ingredients-list").append(arrP);
+            index++;
+        });
+    };
+
+    //Function to display the recipe
+
+    function showRecipe(query) {
         let ingredientList = $("<ul>");
         let foodImageHtml = $("<img class='img-thumbnail' style='height: 300px;'>");
         let imageURL;
@@ -91,7 +240,7 @@ $(document).ready(function () {
         let ingMeasureArr = [];
 
         $.ajax({
-            url: recipeQuery,
+            url: query,
             method: "GET"
         }).then(function (recipe) {
 
@@ -102,28 +251,28 @@ $(document).ready(function () {
             foodImageHtml.attr("alt", imageAlt);
             recipeText = recipe.meals[0].strInstructions;
 
-            if (recipe.meals[0].strMeasure1 !== "" && recipe.meals[0].strMeasure1 !== null){
+            if (recipe.meals[0].strMeasure1 !== "" && recipe.meals[0].strMeasure1 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure1 + " " + recipe.meals[0].strIngredient1);
             }
-            if (recipe.meals[0].strMeasure2 !== "" && recipe.meals[0].strMeasure2 !== null){
+            if (recipe.meals[0].strMeasure2 !== "" && recipe.meals[0].strMeasure2 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure2 + " " + recipe.meals[0].strIngredient2);
             }
-            if (recipe.meals[0].strMeasure3 !== "" && recipe.meals[0].strMeasure3 !== null){
+            if (recipe.meals[0].strMeasure3 !== "" && recipe.meals[0].strMeasure3 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure3 + " " + recipe.meals[0].strIngredient3);
             }
-            if (recipe.meals[0].strMeasure4 !== "" && recipe.meals[0].strMeasure4 !== null){
+            if (recipe.meals[0].strMeasure4 !== "" && recipe.meals[0].strMeasure4 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure4 + " " + recipe.meals[0].strIngredient4);
             }
-            if (recipe.meals[0].strMeasure5 !== "" && recipe.meals[0].strMeasure5 !== null){
+            if (recipe.meals[0].strMeasure5 !== "" && recipe.meals[0].strMeasure5 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure5 + " " + recipe.meals[0].strIngredient5);
             }
-            if (recipe.meals[0].strMeasure6 !== "" && recipe.meals[0].strMeasure6 !== null){
+            if (recipe.meals[0].strMeasure6 !== "" && recipe.meals[0].strMeasure6 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure6 + " " + recipe.meals[0].strIngredient6);
             }
-            if (recipe.meals[0].strMeasure7 !== "" && recipe.meals[0].strMeasure7 !== null){
+            if (recipe.meals[0].strMeasure7 !== "" && recipe.meals[0].strMeasure7 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure7 + " " + recipe.meals[0].strIngredient7);
             }
-            if (recipe.meals[0].strMeasure8 !== "" && recipe.meals[0].strMeasure8 !== null){
+            if (recipe.meals[0].strMeasure8 !== "" && recipe.meals[0].strMeasure8 !== null) {
                 ingMeasureArr.push(recipe.meals[0].strMeasure8 + " " + recipe.meals[0].strIngredient8);
             }
             if (recipe.meals[0].strMeasure9 !== "" && recipe.meals[0].strMeasure9 !== null) {
@@ -174,115 +323,5 @@ $(document).ready(function () {
             $("#recipe-container").html(recipeItems);
 
         });
-
-    });
-
-    function createList(arr) {
-        $(".ingredients-list").empty();
-        let index = 0;
-        arr.forEach(function (element) {
-            let arrP = $("<p>");
-            let removeBtn = $("<button>");
-            removeBtn.addClass("remove-btn");
-            removeBtn.attr("index", index);
-            removeBtn.text("✓");
-            arrP.text(element);
-            arrP = arrP.prepend(removeBtn);
-
-            $(".ingredients-list").append(arrP);
-            index++;
-        });
-    }
-    
-    // Listener and function for top most search button
-    $(document).on("click", "#topSearchBtn", function() {
-        event.preventDefault();
-
-        let nameSearchTerm = $("#searchbar1").val().trim();
-        $("#searchbar1").val("");
-
-        if (nameSearchTerm == "") {
-            return false;
-        } else {
-            $.ajax({
-                url : recipeQueryURL + nameSearchTerm,
-                method : "GET"
-            }).then(function(response) {
-                console.log(response);
-                $("#recipe-container").empty();
-                
-                if (response.meals == null) {
-                    $("#recipe-container").append("<p>No recipes found. Please try again.</p>");
-                } else {
-                    let recipeList = $("<ol>");
-                    
-                    response.meals.forEach(function (obj) {
-                        recipeList.append(`<li><a href='#' id='recipe-result' recipe-id=${obj.idMeal}>${obj.strMeal}</a></li>`);
-                    });
-                    
-                    $("#recipe-container").append(recipeList);
-                };
-            });
-        };
-    });
-    
-    // Listener for buttons
-    $(document).on("click", "#recipe-result", function() {
-        // Format term for query
-        const formattedTerms = $(this).text().split(" ").join("+");
-
-        // Query URL
-        const queryURL = "https://www.googleapis.com/youtube/v3/search";
-
-        // API Key
-        const apiKey = "AIzaSyCjuGA0pvhgoecbDeHFEn4iygJX6zzLGA0";
-
-        $.ajax({
-            url : queryURL,
-            method : "GET",
-            data : {
-                key : apiKey,
-                maxResults : 4,
-                part : "snippet, id",
-                q : `${formattedTerms}`,
-                type : "video"
-            } 
-        }).then(function(response) {
-            // Render video gallery
-            const videoRender = () => {
-                $("#videoContainer").empty();
-                
-                for (var i = 0; i < response.items.length; i++) {
-                    let videoLink = $("<a class='my-3 video-link'>");
-                    let videoDiv = $("<div class='m-3' style='display: inline-block; height: 200px;'>");
-                    let thumbnail = $("<img class='img-fluid'>");
-                    let videoTitle = $("<p>");
-
-                    $(videoLink).attr("data-video", response.items[i].id.videoId);
-                    $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
-                    $(videoTitle).text(response.items[i].snippet.title);
-                    
-                    $(videoDiv).append(thumbnail);
-                    $(videoDiv).append(videoTitle);
-
-                    $(videoLink).append(videoDiv);
-                    $("#videoContainer").append(videoLink);
-                };
-            };
-
-            videoRender();
-        });
-    });
-
-    // Listener for video link
-    $(document).on("click", '.video-link', function() {
-        $("#recipe-container").empty();
-        
-        const videoSrc = $(this).attr("data-video");
-
-        const videoIframe = $("<iframe id='ytplayer' class='m-3' type='text/html' width='640' height='360' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>");
-        $(videoIframe).attr("src", "https://www.youtube.com/embed/" + videoSrc + "?autoplay=0");
-
-        $("#recipe-container").append(videoIframe);
-    });
+    };
 });
