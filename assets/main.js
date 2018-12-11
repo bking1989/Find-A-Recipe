@@ -106,97 +106,7 @@ $(document).ready(function () {
             return false;
         } else {
             showRecipe(recipeQueryURL + searchTerms);
-
-            // Query URL
-            const queryURL = "https://www.googleapis.com/youtube/v3/search";
-
-            // API Key
-            const apiKey = "AIzaSyCjuGA0pvhgoecbDeHFEn4iygJX6zzLGA0";
-            
-            $.ajax({
-                url: queryURL,
-                method: "GET",
-                data: {
-                    key: apiKey,
-                    maxResults: 4,
-                    part: "snippet, id",
-                    q: `${searchTerms}`,
-                    type: "video"
-                }
-            }).then(function (response) {
-                // Render video gallery
-                const videoRender = () => {
-                    $("#videoContainer").empty();
-    
-                    for (var i = 0; i < response.items.length; i++) {
-                        let videoLink = $("<a class='my-3 video-link'>");
-                        let videoDiv = $("<div class='m-3' style='display: inline-block; height: 160px;'>");
-                        let thumbnail = $("<img class='img-fluid'>");
-                        let videoTitle = $("<p>");
-    
-                        $(videoLink).attr("data-video", response.items[i].id.videoId);
-                        $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
-                        $(videoTitle).text(response.items[i].snippet.title);
-    
-                        $(videoDiv).append(thumbnail);
-                        $(videoDiv).append(videoTitle);
-    
-                        $(videoLink).append(videoDiv);
-                        $("#videoContainer").append(videoLink);
-                    };
-                };
-    
-                videoRender();
-            });
         };
-    });
-
-    // Listener for buttons
-    $(document).on("click", "#recipe-result", function () {
-        // Format term for query
-        const formattedTerms = $(this).text().split(" ").join("+");
-
-        // Query URL
-        const queryURL = "https://www.googleapis.com/youtube/v3/search";
-
-        // API Key
-        const apiKey = "AIzaSyCjuGA0pvhgoecbDeHFEn4iygJX6zzLGA0";
-
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-            data: {
-                key: apiKey,
-                maxResults: 4,
-                part: "snippet, id",
-                q: `${formattedTerms}`,
-                type: "video"
-            }
-        }).then(function (response) {
-            // Render video gallery
-            const videoRender = () => {
-                $("#videoContainer").empty();
-
-                for (var i = 0; i < response.items.length; i++) {
-                    let videoLink = $("<a class='my-3 video-link'>");
-                    let videoDiv = $("<div class='m-3' style='display: inline-block; height: 160px;'>");
-                    let thumbnail = $("<img class='img-fluid'>");
-                    let videoTitle = $("<p>");
-
-                    $(videoLink).attr("data-video", response.items[i].id.videoId);
-                    $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
-                    $(videoTitle).text(response.items[i].snippet.title);
-
-                    $(videoDiv).append(thumbnail);
-                    $(videoDiv).append(videoTitle);
-
-                    $(videoLink).append(videoDiv);
-                    $("#videoContainer").append(videoLink);
-                };
-            };
-
-            videoRender();
-        });
     });
 
     // Listener for video link
@@ -205,7 +115,7 @@ $(document).ready(function () {
 
         const videoSrc = $(this).attr("data-video");
 
-        const videoIframe = $("<iframe id='ytplayer' class='m-3' type='text/html' width='640' height='360' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>");
+        const videoIframe = $("<iframe id='ytplayer' class='my-3' type='text/html' width='560' height='340' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>");
         $(videoIframe).attr("src", "https://www.youtube.com/embed/" + videoSrc + "?autoplay=0");
 
         $("#recipe-container").append(videoIframe);
@@ -322,6 +232,52 @@ $(document).ready(function () {
 
             $("#recipe-container").html(recipeItems);
 
+            // YouTube API starts here
+
+            // Search term for YouTube API
+            const videoSearchTerm = recipe.meals[0].strMeal;
+
+            // Query URL
+            const queryURL = "https://www.googleapis.com/youtube/v3/search";
+
+            // API Key
+            const apiKey = "AIzaSyCjuGA0pvhgoecbDeHFEn4iygJX6zzLGA0";
+            
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                data: {
+                    key: apiKey,
+                    maxResults: 4,
+                    part: "snippet, id",
+                    q: `${videoSearchTerm}`,
+                    type: "video"
+                }
+            }).then(function (response) {
+                // Render video gallery
+                const videoRender = () => {
+                    $("#videoContainer").empty();
+
+                    for (var i = 0; i < response.items.length; i++) {
+                        let videoLink = $("<a class='my-3 video-link'>");
+                        let videoDiv = $("<div class='m-3' style='display: inline-block; height: 160px;'>");
+                        let thumbnail = $("<img class='img-fluid'>");
+                        let videoTitle = $("<p>");
+
+                        $(videoLink).attr("data-video", response.items[i].id.videoId);
+                        $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
+                        $(videoTitle).text(response.items[i].snippet.title);
+
+                        $(videoDiv).append(thumbnail);
+                        $(videoDiv).append(videoTitle);
+
+                        $(videoLink).append(videoDiv);
+                        $("#videoContainer").append(videoLink);
+                    };
+                };
+
+                videoRender();
+            });
         });
     };
 });
