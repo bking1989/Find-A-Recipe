@@ -105,7 +105,49 @@ $(document).ready(function () {
         if (nameSearchTerm == "") {
             return false;
         } else {
-            showRecipe(recipeQueryURL + searchTerms)
+            showRecipe(recipeQueryURL + searchTerms);
+
+            // Query URL
+            const queryURL = "https://www.googleapis.com/youtube/v3/search";
+
+            // API Key
+            const apiKey = "AIzaSyCjuGA0pvhgoecbDeHFEn4iygJX6zzLGA0";
+            
+            $.ajax({
+                url: queryURL,
+                method: "GET",
+                data: {
+                    key: apiKey,
+                    maxResults: 4,
+                    part: "snippet, id",
+                    q: `${searchTerms}`,
+                    type: "video"
+                }
+            }).then(function (response) {
+                // Render video gallery
+                const videoRender = () => {
+                    $("#videoContainer").empty();
+    
+                    for (var i = 0; i < response.items.length; i++) {
+                        let videoLink = $("<a class='my-3 video-link'>");
+                        let videoDiv = $("<div class='m-3' style='display: inline-block; height: 160px;'>");
+                        let thumbnail = $("<img class='img-fluid'>");
+                        let videoTitle = $("<p>");
+    
+                        $(videoLink).attr("data-video", response.items[i].id.videoId);
+                        $(thumbnail).attr("src", response.items[i].snippet.thumbnails.high.url);
+                        $(videoTitle).text(response.items[i].snippet.title);
+    
+                        $(videoDiv).append(thumbnail);
+                        $(videoDiv).append(videoTitle);
+    
+                        $(videoLink).append(videoDiv);
+                        $("#videoContainer").append(videoLink);
+                    };
+                };
+    
+                videoRender();
+            });
         };
     });
 
@@ -137,7 +179,7 @@ $(document).ready(function () {
 
                 for (var i = 0; i < response.items.length; i++) {
                     let videoLink = $("<a class='my-3 video-link'>");
-                    let videoDiv = $("<div class='m-3' style='display: inline-block; height: 200px;'>");
+                    let videoDiv = $("<div class='m-3' style='display: inline-block; height: 160px;'>");
                     let thumbnail = $("<img class='img-fluid'>");
                     let videoTitle = $("<p>");
 
