@@ -4,7 +4,6 @@ $(document).ready(function () {
 
     const ingQueryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
     const recipeQueryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-    const idQueryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
 
     
 
@@ -198,14 +197,14 @@ $(document).ready(function () {
     $(document).on("click", "#topSearchBtn", function() {
         event.preventDefault();
 
-        let idSearchTerm = $("#searchbar1").val().trim();
+        let nameSearchTerm = $("#searchbar1").val().trim();
         $("#searchbar1").val("");
 
-        if (idSearchTerm == "") {
+        if (nameSearchTerm == "") {
             return false;
         } else {
             $.ajax({
-                url : idQueryURL + idSearchTerm,
+                url : recipeQueryURL + nameSearchTerm,
                 method : "GET"
             }).then(function(response) {
                 console.log(response);
