@@ -1,0 +1,17 @@
+.card {
+  width: 20rem;
+  height: 40rem;
+  border: 2px solid black;
+  margin-left: 1.25rem;
+}
+
+.card-header {
+  border-bottom: 2px solid black;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.card-body {
+  background-color: tan;
+}
+/*# sourceMappingURL=sass.css.map */

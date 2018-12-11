@@ -1,0 +1,24 @@
+$cardwidth: 20rem;
+$cardheight: 40rem;
+$cardborder: 2px solid black;
+$cardbackground: tan;
+$cardfontsize: 1.5rem;
+
+
+
+.card {
+    width: $cardwidth;
+    height: $cardheight;
+    border: $cardborder; 
+    margin-left: 1.25rem;
+}
+.card-header {
+    border-bottom: $cardborder;
+    text-align: center;
+    font-size: $cardfontsize;
+}
+
+.card-body {
+    background-color: $cardbackground;
+
+}
