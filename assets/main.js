@@ -3,6 +3,7 @@ $(document).ready(function () {
     let ingredients = [];
     let ingQueryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
     let recipeQueryURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+    let idQueryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
 
     $("#add-ingredients").on("click", function () {
         event.preventDefault();
@@ -92,4 +93,36 @@ $(document).ready(function () {
             index++;
         });
     }
+    
+    // Listener and function for top most search button
+    $(document).on("click", "#topSearchBtn", function() {
+        event.preventDefault();
+
+        let idSearchTerm = $("#searchbar1").val().trim();
+        $("#searchbar1").val("");
+
+        if (idSearchTerm == "") {
+            return false;
+        } else {
+            $.ajax({
+                url : idQueryURL + idSearchTerm,
+                method : "GET"
+            }).then(function(response) {
+                console.log(response);
+                $(".modal-id").empty();
+                
+                if (response.meals == null) {
+                    $(".modal-id").append("<p>No recipes found. Please try again.</p>");
+                } else {
+                    let recipeList = $("<ol>");
+                    
+                    response.meals.forEach(function (obj) {
+                        recipeList.append(`<li><a href='#' id='recipe-result' recipe-id=${obj.idMeal}>${obj.strMeal}</a></li>`);
+                    });
+                    
+                    $(".modal-id").append(recipeList);
+                };
+            });
+        };
+    });
 });
