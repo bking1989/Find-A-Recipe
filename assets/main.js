@@ -209,10 +209,10 @@ $(document).ready(function () {
                 method : "GET"
             }).then(function(response) {
                 console.log(response);
-                $(".modal-id").empty();
+                $("#recipe-container").empty();
                 
                 if (response.meals == null) {
-                    $(".modal-id").append("<p>No recipes found. Please try again.</p>");
+                    $("#recipe-container").append("<p>No recipes found. Please try again.</p>");
                 } else {
                     let recipeList = $("<ol>");
                     
@@ -220,7 +220,7 @@ $(document).ready(function () {
                         recipeList.append(`<li><a href='#' id='recipe-result' recipe-id=${obj.idMeal}>${obj.strMeal}</a></li>`);
                     });
                     
-                    $(".modal-id").append(recipeList);
+                    $("#recipe-container").append(recipeList);
                 };
             });
         };
