@@ -5,18 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--Google font-->
     <link href="https://fonts.googleapis.com/css?family=Carter+One|Courgette|Luckiest+Guy" rel="stylesheet">
+
+    <!--CSS reset file-->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+    <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+
+    <!--SASS stylesheet-->
     <link rel="stylesheet" type="text/css" href="assets/css/sassstyle.css">
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/modal.css">-->
 
     <title>Find A Recipe</title>
 </head>
 
 <body>
 
+    <!--Navbar containing the title of the page and a search function to find recipes by name-->
     <header class="navbar">
         <section class="navbar-section">
             <a id="headerFont" class="navbar-brand mr-2 text-light">Find A Recipe</a>
@@ -30,10 +38,24 @@
         </section>
     </header>
 
-
+    <!--Main content-->
     <div class="container-fluid">
         <div class="row">
+            <!--Instructions on how to use the site-->
+            <div class="col-md-6 offset-md-3 mt-2 text-center">
+                <div class="bg-white border border-secondary rounded">
+                    By using Find A Recipe, you can search for recipes two
+                    different ways. If you already know the recipe, use the search bar at the top of the page. You can
+                    also search by a list of ingredients in your home to find a number of recipes you can cook.
+                    Additionally,
+                    you can click on a video below the recipe if you prefer to cook the meal in a different way.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-sm-2">
+                <!--Card to hold the ingredients the user enters-->
                 <div class="card">
                     <div class="card-header">
                         Ingredients
@@ -52,6 +74,8 @@
 
                 </div>
             </div>
+
+            <!--Card to hold the search results based on the ingredients the user provides.-->
             <div class="col-sm-3">
                 <div class="card">
                     <div class="card-header bg-white">
@@ -63,6 +87,7 @@
                 </div>
             </div>
 
+            <!--This is where the selected recipe goes whether they click on a Search Result item or use the top search option-->
             <div class="col-sm-6 mt-3">
                 <div class="card card-2">
                     <div class="card-header">
@@ -80,14 +105,18 @@
 
     </div>
 
+    <!--When a recipe is pulled up, four related videos are placed here-->
     <footer id="videoContainer" style="display: flex; flex-direction: row; height: 160px;"></footer>
-    
+
+    <!--Javascript to get Bootstrap to function properly-->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
+    <!--Javascript page where the magic happens-->
     <script src="assets/main.js"></script>
 
 
