@@ -1,5 +1,6 @@
 # Find-A-Recipe
 
+Please note that this is a fork of the original group project, which can be found [here](http://rawkitman.github.io/Find-A-Recipe).
 
 This website is a must have for anyone having trouble coming up with meals to cook. The user can enter a list of ingredients they have on hand and search for a number of recipes from the theMealDB.com database. The user then selects the desired recipe and it will load right on the page. If the user doesn't like the recipe or is more of a visual learner, they can click on one of four YouTube videos that will load below the recipe. For added convenience, if the user knows the name of the recipe they want to follow already, the search bar at the top can pull up the recipe immediately by searching the recipe name. 
 
